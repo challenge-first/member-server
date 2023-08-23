@@ -46,7 +46,7 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PatchMapping("/point")
+    @PutMapping("/point")
     public ResponseEntity payPoint(@RequestBody RequestOrderDto requestDto, @LoginMember Long memberId) {
         memberService.payPoint(requestDto.getPrice(), memberId);
         return ResponseEntity.status(HttpStatus.OK).build();
