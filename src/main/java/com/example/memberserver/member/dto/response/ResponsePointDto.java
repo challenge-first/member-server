@@ -12,7 +12,7 @@ public class ResponsePointDto {
 
     public ResponsePointDto(Member member) {
         this.point = member.getPoint();
-        this.deposit = member.getPoint();
+        this.deposit = member.getDeposit();
         this.availablePoint = member.getAvailablePoint();
     }
 }

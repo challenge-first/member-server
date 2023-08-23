@@ -18,5 +18,5 @@ public interface MemberService {
 
     void subtractPointsOnBidSuccess(Long memberId, Long bid);
 
-    void payPoint(Long memberId, Long price);
+    void payPoint(Long price, Long memberId);
 }

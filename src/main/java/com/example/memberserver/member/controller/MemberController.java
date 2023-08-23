@@ -4,6 +4,7 @@ package com.example.memberserver.member.controller;
 import com.example.memberserver.auth.auth.LoginMember;
 import com.example.memberserver.member.dto.request.RequestMemberLoginDto;
 import com.example.memberserver.member.dto.request.RequestMemberPointDto;
+import com.example.memberserver.member.dto.request.RequestOrderDto;
 import com.example.memberserver.member.dto.response.ResponseDataDto;
 import com.example.memberserver.member.dto.response.ResponseMessageDto;
 import com.example.memberserver.member.dto.response.ResponsePointDto;
@@ -33,9 +34,8 @@ public class MemberController {
                 .body(response);
     }
 
-    // members/memberId
-    @GetMapping("/{memberId}")
-    public ResponseEntity<ResponsePointDto> getPoint(@PathVariable Long memberId) {
+    @GetMapping("/point")
+    public ResponseEntity<ResponsePointDto> getPoint(@LoginMember Long memberId) {
         ResponsePointDto response = memberService.getPoint(memberId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -44,5 +44,11 @@ public class MemberController {
     public ResponseEntity<ResponseDataDto<ResponseMessageDto>> addPoint(@RequestBody RequestMemberPointDto requestDto, @LoginMember Long memberId) {
         ResponseDataDto<ResponseMessageDto> response = new ResponseDataDto<>(memberService.addPoint(requestDto, memberId));
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PatchMapping("/point")
+    public ResponseEntity payPoint(@RequestBody RequestOrderDto requestDto, @LoginMember Long memberId) {
+        memberService.payPoint(requestDto.getPrice(), memberId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

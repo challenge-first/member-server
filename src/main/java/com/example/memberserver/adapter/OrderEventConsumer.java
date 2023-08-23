@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Slf4j
-@Service
+//@Service
 public class OrderEventConsumer {
 
     private final MemberService memberService;
@@ -22,7 +22,7 @@ public class OrderEventConsumer {
         log.info("OrderEventConsumer running!");
         log.info("message = {}", message);
         RequestOrderDto requestOrderDto = objectMapper.readValue(message, RequestOrderDto.class);
-        log.info("requestBidDto = {}, {}", requestOrderDto.getMemberId(), requestOrderDto.getPrice());
-        memberService.payPoint(requestOrderDto.getMemberId(), requestOrderDto.getPrice());
+//        log.info("requestBidDto = {}, {}", requestOrderDto.getMemberId(), requestOrderDto.getPrice());
+//        memberService.payPoint(requestOrderDto.getMemberId(), requestOrderDto.getPrice());
     }
 }

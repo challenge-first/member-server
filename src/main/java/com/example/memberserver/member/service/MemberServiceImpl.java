@@ -3,6 +3,7 @@ package com.example.memberserver.member.service;
 
 import com.example.memberserver.member.dto.request.RequestMemberLoginDto;
 import com.example.memberserver.member.dto.request.RequestMemberPointDto;
+import com.example.memberserver.member.dto.request.RequestOrderDto;
 import com.example.memberserver.member.dto.response.ResponseMessageDto;
 import com.example.memberserver.member.dto.response.ResponsePointDto;
 import com.example.memberserver.member.dto.response.ResponseTokenDto;
@@ -61,8 +62,9 @@ public class MemberServiceImpl implements MemberService {
         }
         member.setDeposit(bid);
     }
-
     @Transactional
+
+    @Override
     public void subtractPointsOnBidSuccess(Long memberId, Long bid) {
         Member member = findByMemberId(memberId);
         log.info("bid = {}, deposit ={}", bid, member.getDeposit());
@@ -73,13 +75,13 @@ public class MemberServiceImpl implements MemberService {
         }
         member.subtractPointsOnBidSuccess();
     }
-
     @Transactional
-    public void payPoint(Long memberId, Long price) {
+    @Override
+    public void payPoint(Long price, Long memberId) {
         Member member = findByMemberId(memberId);
 
         if (member.getAvailablePoint() < price) {
-            throw new IllegalArgumentException("결제 금액은 포인트보다 클 수 없습니다.");
+            throw new IllegalArgumentException("결제 금액은 가용 포인트보다 클 수 없습니다.");
         }
         member.payPoint(price);
     }
