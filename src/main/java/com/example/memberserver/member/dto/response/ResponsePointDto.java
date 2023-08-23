@@ -1,13 +1,18 @@
 package com.example.memberserver.member.dto.response;
 
+import com.example.memberserver.member.entity.Member;
 import lombok.Getter;
 
 @Getter
 public class ResponsePointDto {
 
     private Long point;
+    private Long deposit;
+    private Long availablePoint;
 
-    public ResponsePointDto(Long point) {
-        this.point = point;
+    public ResponsePointDto(Member member) {
+        this.point = member.getPoint();
+        this.deposit = member.getPoint();
+        this.availablePoint = member.getAvailablePoint();
     }
 }

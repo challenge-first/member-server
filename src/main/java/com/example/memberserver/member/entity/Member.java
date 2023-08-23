@@ -40,7 +40,7 @@ public class Member {
         this.point += point;
     }
 
-    public void payPoint(int price) {
+    public void payPoint(Long price) {
         Long availablePoint = getAvailablePoint();
         Long balance = availablePoint - price;
         if (balance < 0) {
