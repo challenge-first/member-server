@@ -1,0 +1,58 @@
+jwt:
+  secret:
+    key: ${secrets.JWT_SECRET_KEY}
+  expire:
+    length: ${secrets.JWT_EXPIRE_LENGTH}
+
+server:
+  port: 0
+
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: ${secrets.KAFKA_BOOTSTRAP_SERVERS}
+      group-id: ${secrets.KAFKA_GROUP_ID}
+  application:
+    name: member-server
+  zipkin:
+    base-url: ${secrets.ZIPKIN_BASE_URL}
+    enable: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${secrets.DB_URL}
+    username: ${secrets.DB_USERNAME}
+    password: ${secrets.DB_PASSWORD}
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${secrets.EUREKA_DEFAULT_ZONE}
+
+sleuth:
+  sampler:
+    probability: 1.0
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${secrets.ACTUATOR_END_POINT}
+
+kafka:
+  topic:
+    bid: ${secrets.KAFKA_TOPIC_BID}
+    successbid: ${secrets.KAFKA_TOPIC_SUCCESSBID}
+
+  address: ${secrets.KAFKA_ADDRESS}
