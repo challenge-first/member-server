@@ -6,9 +6,6 @@ jwt:
 
 server:
   port: ${PORT}
-  servlet:
-    encoding:
-      force: true  
 
 spring:
   application:
