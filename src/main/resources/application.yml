@@ -1,0 +1,59 @@
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY}
+  expire:
+    length: ${JWT_EXPIRE_LENGTH}
+
+server:
+  port: ${PORT}
+
+spring:
+  application:
+    name: member-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${ACTUATOR_END_POINT}
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: b3
+      produce: b3_multi
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_BASE_URL}
+
+kafka:
+  topic:
+    bid: ${KAFKA_TOPIC_BID}
+    successbid: ${KAFKA_TOPIC_SUCCESSBID}
+    order: ${KAFKA_TOPIC_ORDER}
+  address: ${KAFKA_ADDRESS}
+
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-},  %X{spanId:-}]"
