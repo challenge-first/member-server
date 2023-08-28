@@ -1,27 +1,24 @@
 jwt:
   secret:
-    key: ${secrets.JWT_SECRET_KEY}
+    key: ${JWT_SECRET_KEY}
   expire:
-    length: ${secrets.JWT_EXPIRE_LENGTH}
+    length: ${JWT_EXPIRE_LENGTH}
 
 server:
-  port: 0
+  port: ${PORT}
 
 spring:
   kafka:
     consumer:
-      bootstrap-servers: ${secrets.KAFKA_BOOTSTRAP_SERVERS}
-      group-id: ${secrets.KAFKA_GROUP_ID}
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+      group-id: ${KAFKA_GROUP_ID}
   application:
     name: member-server
-  zipkin:
-    base-url: ${secrets.ZIPKIN_BASE_URL}
-    enable: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${secrets.DB_URL}
-    username: ${secrets.DB_USERNAME}
-    password: ${secrets.DB_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   h2:
     console:
       enabled: true
@@ -37,22 +34,30 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: ${secrets.EUREKA_DEFAULT_ZONE}
-
-sleuth:
-  sampler:
-    probability: 1.0
-
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
 
 management:
   endpoints:
     web:
       exposure:
-        include: ${secrets.ACTUATOR_END_POINT}
+        include: ${ACTUATOR_END_POINT}
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: b3
+      produce: b3_multi
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_BASE_URL}
 
 kafka:
   topic:
-    bid: ${secrets.KAFKA_TOPIC_BID}
-    successbid: ${secrets.KAFKA_TOPIC_SUCCESSBID}
+    bid: ${KAFKA_TOPIC_BID}
+    successbid: ${KAFKA_TOPIC_SUCCESSBID}
+    order: ${KAFKA_TOPIC_ORDER}
+  address: ${KAFKA_ADDRESS}
 
-  address: ${secrets.KAFKA_ADDRESS}
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-},  %X{spanId:-}]"

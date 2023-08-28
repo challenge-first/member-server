@@ -54,6 +54,7 @@ jobs:
             
             sudo docker run -p ${{ secrets.PORT }}:${{ secrets.PORT }} \
             --name ${{ secrets.PROJECT_NAME }} \
+            -e PORT=${{ secrets.PORT }} \
             -e DB_URL=${{ secrets.DB_URL }} \
             -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
             -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
@@ -63,6 +64,7 @@ jobs:
             -e KAFKA_ADDRESS=${{ secrets.KAFKA_ADDRESS }} \
             -e KAFKA_TOPIC_BID=${{ secrets.KAFKA_TOPIC_BID }} \
             -e KAFKA_TOPIC_SUCCESSBID=${{ secrets.KAFKA_TOPIC_SUCCESSBID }} \
+            -e KAFKA_TOPIC_ORDER=${{ secrets.KAFKA_TOPIC_ORDER }} \
             -e KAFKA_BOOTSTRAP_SERVERS=${{ secrets.KAFKA_BOOTSTRAP_SERVERS }} \
             -e KAFKA_GROUP_ID=${{ secrets.KAFKA_GROUP_ID }} \
             -e ZIPKIN_BASE_URL=${{ secrets.ZIPKIN_BASE_URL }} \
