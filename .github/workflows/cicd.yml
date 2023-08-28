@@ -66,4 +66,4 @@ jobs:
             -e KAFKA_TOPIC_ORDER=${{ secrets.KAFKA_TOPIC_ORDER }} \
             -e ZIPKIN_BASE_URL=${{ secrets.ZIPKIN_BASE_URL }} \
             -e ACTUATOR_END_POINT=${{ secrets.ACTUATOR_END_POINT }} \
-            princetons/member-server
+            -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.PROJECT_NAME }}
