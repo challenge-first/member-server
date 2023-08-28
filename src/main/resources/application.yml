@@ -32,7 +32,7 @@ eureka:
     service-url:
       defaultZone: ${EUREKA_DEFAULT_ZONE}
   instance:
-    hostname: 15.164.102.59
+    hostname: 172.31.34.194
 management:
   endpoints:
     web:
