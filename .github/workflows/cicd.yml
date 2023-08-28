@@ -58,6 +58,7 @@ jobs:
             -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
             -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
             -e EUREKA_DEFAULT_ZONE=${{ secrets.EUREKA_DEFAULT_ZONE }} \
+            -e PRIVATE_IP=${{ secrets.PRIVATE_IP }} \
             -e JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
             -e JWT_EXPIRE_LENGTH=${{ secrets.JWT_EXPIRE_LENGTH }} \
             -e KAFKA_ADDRESS=${{ secrets.KAFKA_ADDRESS }} \
