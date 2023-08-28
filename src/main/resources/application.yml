@@ -31,7 +31,8 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: ${EUREKA_DEFAULT_ZONE}
-
+  instance:
+    prefer-ip-address: true
 management:
   endpoints:
     web:
