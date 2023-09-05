@@ -3,7 +3,6 @@ package com.example.memberserver.member.service;
 
 import com.example.memberserver.member.dto.request.RequestMemberLoginDto;
 import com.example.memberserver.member.dto.request.RequestMemberPointDto;
-import com.example.memberserver.member.dto.request.RequestOrderDto;
 import com.example.memberserver.member.dto.response.ResponseMessageDto;
 import com.example.memberserver.member.dto.response.ResponsePointDto;
 import com.example.memberserver.member.dto.response.ResponseTokenDto;
@@ -46,6 +45,7 @@ public class MemberServiceImpl implements MemberService {
         return new ResponsePointDto(member);
     }
 
+    @Transactional
     @Override
     public ResponseMessageDto addPoint(RequestMemberPointDto requestDto, Long memberId) {
         Member member = findByMemberId(memberId);
@@ -63,7 +63,6 @@ public class MemberServiceImpl implements MemberService {
         member.setDeposit(bid);
     }
     @Transactional
-
     @Override
     public void subtractPointsOnBidSuccess(Long memberId, Long bid) {
         Member member = findByMemberId(memberId);
