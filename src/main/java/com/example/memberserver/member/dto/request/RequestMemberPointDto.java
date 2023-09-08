@@ -3,10 +3,9 @@ package com.example.memberserver.member.dto.request;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import static lombok.AccessLevel.PROTECTED;
 
 @Getter
-@NoArgsConstructor(access = PROTECTED)
+@NoArgsConstructor
 public class RequestMemberPointDto {
 
     private Long point;
