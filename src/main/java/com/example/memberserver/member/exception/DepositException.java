@@ -1,0 +1,8 @@
+package com.example.memberserver.member.exception;
+
+public class DepositException extends RuntimeException {
+
+    public DepositException(String message) {
+        super(message);
+    }
+}

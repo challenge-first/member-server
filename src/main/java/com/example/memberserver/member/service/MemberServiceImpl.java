@@ -7,7 +7,9 @@ import com.example.memberserver.member.dto.response.ResponseMessageDto;
 import com.example.memberserver.member.dto.response.ResponsePointDto;
 import com.example.memberserver.member.dto.response.ResponseTokenDto;
 import com.example.memberserver.member.entity.Member;
+import com.example.memberserver.member.exception.DepositException;
 import com.example.memberserver.member.exception.PasswordMismatchException;
+import com.example.memberserver.member.exception.PointException;
 import com.example.memberserver.member.exception.UserNotFoundException;
 import com.example.memberserver.member.jwt.JwtGenerator;
 import com.example.memberserver.member.repository.MemberRepository;
@@ -58,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
     public void updateDeposit(Long memberId, Long bid) {
         Member member = findByMemberId(memberId);
         if (member.getPoint() < bid) {
-            throw new IllegalStateException("예치금은 포인트보다 클 수 없습니다.");
+            throw new DepositException("예치금은 포인트보다 클 수 없습니다.");
         }
         member.setDeposit(bid);
     }
@@ -70,7 +72,7 @@ public class MemberServiceImpl implements MemberService {
 
         if (!member.getDeposit().equals(bid)) {
             log.error("입찰금액이 해당 회원의 예치금과 다릅니다.");
-            throw new IllegalArgumentException("입찰금액이 해당 회원의 예치금과 다릅니다.");
+            throw new DepositException("입찰금액이 해당 회원의 예치금과 다릅니다.");
         }
         member.subtractPointsOnBidSuccess();
     }
@@ -80,7 +82,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = findByMemberId(memberId);
 
         if (member.getAvailablePoint() < price) {
-            throw new IllegalArgumentException("결제 금액은 가용 포인트보다 클 수 없습니다.");
+            throw new PointException("결제 금액은 가용 포인트보다 클 수 없습니다.");
         }
         member.payPoint(price);
     }
